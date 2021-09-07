@@ -113,6 +113,7 @@ def main():
                 lineage = Lineage(record.taxid, ncbi).lineage_string
                 ofh.write(acc.strip() + ',' + record.taxid + ',' + lineage + '\n')
             except:
+                print("cannot find: " + str(acc) + ". Please remove it from your dataset.")
                 continue
 
     ofh.close()
