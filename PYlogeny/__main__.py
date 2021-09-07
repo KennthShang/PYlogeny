@@ -107,10 +107,13 @@ def main():
 
     with open(args.infile, 'r') as ifh:
         for i, acc in enumerate(ifh):
-            logger.info(f"Working on Accession {i}: {acc.strip()}")
-            record = Query(acc)
-            lineage = Lineage(record.taxid, ncbi).lineage_string
-            ofh.write(acc.strip() + ',' + record.taxid + ',' + lineage + '\n')
+            try:
+                logger.info(f"Working on Accession {i}: {acc.strip()}")
+                record = Query(acc)
+                lineage = Lineage(record.taxid, ncbi).lineage_string
+                ofh.write(acc.strip() + ',' + record.taxid + ',' + lineage + '\n')
+            except:
+                continue
 
     ofh.close()
 
